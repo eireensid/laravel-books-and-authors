@@ -30,7 +30,7 @@
       <tbody>
         <tr v-for="(book, ind) in books" :key="'book' + book.id">
           <td><input class="form-control" type="text" v-model="book.name"></td>
-          <td>{{ book.author ? book.author.name : '' }}</td>
+          <td>{{ getAuthorName(book) }}</td>
           <td>
             <button class="btn btn-change btn-primary ml-2" @click="updateBook(book)">
               <div class="save-wrapper">
@@ -211,7 +211,7 @@
             const bookIndex = this.books.findIndex(b => b.id === book.id)
             this.books.splice(bookIndex, 1)
           })
-          let index = this.authors.findIndex(a => a.id === author.id);
+          let index = this.authors.findIndex(a => a.id === author.id)
           this.authors.splice(index, 1);
           alert('Автор удален')
         } catch (err) {
@@ -222,6 +222,11 @@
       rememberDeleteAuthor (author) {
         console.log('rememberDeleteAuthor', author)
         this.authorDelete = author
+      },
+      getAuthorName (book) {
+        let index = this.authors.findIndex(a => a.id === book.author_id)
+        if (index === -1) return ''
+        return this.authors[index].name
       }
     }
   }

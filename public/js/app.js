@@ -2197,6 +2197,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     rememberDeleteAuthor: function rememberDeleteAuthor(author) {
       console.log('rememberDeleteAuthor', author);
       this.authorDelete = author;
+    },
+    getAuthorName: function getAuthorName(book) {
+      var index = this.authors.findIndex(function (a) {
+        return a.id === book.author_id;
+      });
+      if (index === -1) return '';
+      return this.authors[index].name;
     }
   }
 });
@@ -39487,7 +39494,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(book.author ? book.author.name : ""))]),
+            _c("td", [_vm._v(_vm._s(_vm.getAuthorName(book)))]),
             _vm._v(" "),
             _c("td", [
               _c(
